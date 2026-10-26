@@ -143,6 +143,8 @@ class Thumbnail
     public function toFile($filename)
     {
         imagepng($this->dstImage, $filename, $this->compression);
+        imagedestroy($this->dstImage);
+        imagedestroy($this->srcImage);
         return $this;
     }
 
@@ -156,6 +158,8 @@ class Thumbnail
     {
         ob_start();
         imagepng($this->dstImage, null, $this->compression);
+        imagedestroy($this->dstImage);
+        imagedestroy($this->srcImage);
         return ob_get_clean();
     }
 
@@ -167,5 +171,7 @@ class Thumbnail
     public function toOutput()
     {
         imagepng($this->dstImage, null, $this->compression);
+        imagedestroy($this->dstImage);
+        imagedestroy($this->srcImage);
     }
 }
