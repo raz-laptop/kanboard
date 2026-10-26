@@ -1,0 +1,13 @@
+# DEMO ONLY. Vulnerable Kanboard target, bound to loopback on the host so it is
+# reachable only via SSH tunnel / from the box itself — never 0.0.0.0.
+# Keep the EC2 security group restricted to your own IP as a second layer.
+services:
+  kanboard-vuln:
+    build:
+      context: ..
+      dockerfile: demo/Dockerfile.vuln
+    image: kanboard-vuln
+    # 127.0.0.1 ONLY. Do not change to "8080:80" — that would expose the RCE.
+    ports:
+      - "127.0.0.1:8080:80"
+    restart: "no"
